@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from bba_server import views
 
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('bba_server.urls')),
+    #url(r'^', include('bba_server.urls')),
+    url(r'^watchers/$', views.watcher_list),
+    #url(r'^watchers/(?<pk>[0-9]+)/$', views.watcher_detail),
 ]
