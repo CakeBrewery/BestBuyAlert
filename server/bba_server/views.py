@@ -25,8 +25,9 @@ def watcher_list(request):
 	"""
 	if request.method == 'GET':
 		for watcher in Watcher.objects.all(): 
-			watcher.update()
-			
+			print "placeholder"
+			#watcher.update() //implement a method to update the watchers
+
 		watcher = Watcher.objects.all()
 		serializer = WatcherSerializer(watcher, many=True)
 		return JSONResponse(serializer.data)
