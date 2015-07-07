@@ -18,6 +18,7 @@ class JSONResponse(HttpResponse):
 		super(JSONResponse, self).__init__(content, **kwargs)
 
 
+
 @csrf_exempt
 def watcher_list(request):
 	"""
@@ -25,8 +26,7 @@ def watcher_list(request):
 	"""
 	if request.method == 'GET':
 		for watcher in Watcher.objects.all(): 
-			print "placeholder"
-			#watcher.update() //implement a method to update the watchers
+			watcher.update()
 
 		watcher = Watcher.objects.all()
 		serializer = WatcherSerializer(watcher, many=True)

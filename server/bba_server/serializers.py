@@ -8,7 +8,7 @@ class WatcherSerializer(serializers.ModelSerializer):
 
 	class Meta: 
 		model = Watcher
-		fields = ('name', 'status', 'purchase', 'target_price', 'products')
+		fields = ('name', 'status', 'purchase', 'target_price', 'lowest_price', 'threshold', 'products')
 
 #A product is one of possibly many products in the product pool of a watcher
 class ProductSerializer(serializers.ModelSerializer): 
