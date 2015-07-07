@@ -1,0 +1,6 @@
+{
+	"name":"iphone watcher",
+	"query_string":"iphone 6s", 
+	"target_price":"700", 
+	"threshold":"0.10"
+}

@@ -8,6 +8,7 @@ STATUS_CHOICES = [(0,'OOS'),(1,'EXPENSIVE'),(2,'CHEAP'),(3,'BUY')]
 #A watcher is in charge of monitoring prices given some options
 class Watcher(models.Model):
 	name = models.TextField()
+	query_string = models.TextField()
 	status = models.CharField(choices=STATUS_CHOICES, default='EXPENSIVE', max_length=16)
 	purchase = models.BooleanField(default=False)
 	target_price = models.DecimalField(max_digits=8, decimal_places=2)
