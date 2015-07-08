@@ -1,0 +1,20 @@
+<div class="jumbotron">
+
+  <h2>Add Watcher</h2>
+
+  <form novalidate class="simple-form">
+    Query: <input type="text" ng-model="watcher.query" /><br />
+    Target price: <input type="text" ng-model="watcher.target" /><br />
+    Threshold: <input type="text" ng-model="watcher.threshold" /><br />
+    <input type="button" ng-click="accept(watcher)" value="Go" />
+  </form>
+
+</div>
+
+<div class="jumbotron">
+
+  <h2>Active Watchers</h2>
+  <p>{{watchers}} </P>
+  <input type="button" ng-click="updateWatchers()" value="Refresh" />
+
+</div>
