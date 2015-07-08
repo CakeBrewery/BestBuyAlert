@@ -21,5 +21,6 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
     #url(r'^', include('bba_server.urls')),
     url(r'^watchers/$', views.watcher_list),
+    url(r'^requests/$', views.user_request),
     #url(r'^watchers/(?<pk>[0-9]+)/$', views.watcher_detail),
 ]

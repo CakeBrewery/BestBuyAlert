@@ -71,3 +71,14 @@ def watcher_list(request):
 			return JSONResponse(serializer.data, status=201)
 		"""
 		#return JSONResponse('error on POST request.method', status=400)
+
+@csrf_exempt
+def user_request(request):
+	if request.method == "GET":
+		return HttpResponse('')
+
+	elif request.method == "POST":
+		data = JSONParser().parse(request)
+		print data
+		return JSONResponse(data, status=200)
+	
