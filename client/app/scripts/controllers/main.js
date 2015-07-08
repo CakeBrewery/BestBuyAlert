@@ -19,10 +19,9 @@ angular.module('clientApp')
     $scope.empty = {};
 
 
-
     $scope.accept = function(watcher) {
     	console.log("Adding Query: " + watcher.query);
-    	$http.post('http://localhost:8000/watchers/', {'query_string':watcher.query,'name':'test','target_price':watcher.target,'threshold':watcher.threshold}).
+    	$http.post('http://localhost:8000/watchers/', {'query_string':watcher.query,'name':'test','target_price':watcher.target,'threshold':watcher.threshold, 'email':watcher.email}).
     		success(function(data, status, headers, config){
     			$scope.updateWatchers();
     			$scope.watcher = $scope.empty;

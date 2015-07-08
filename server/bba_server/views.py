@@ -45,11 +45,14 @@ def watcher_list(request):
 		query_string = data['query_string']
 		target_price = Decimal(data['target_price'])
 		threshold = Decimal(data['threshold'])
+		email = data['email']
 
-		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold)
+		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email)
 		current_watcher.save()
 
-		r = requests.get("http://api.remix.bestbuy.com/v1/products(name=iPhone*)?show=sku,name,regularPrice,salePrice&pageSize=15&page=5&apiKey=xkuweuxjvtgpnpv2vs5usq35&format=json")
+		api_string = "http://api.remix.bestbuy.com/v1/products(sku=" + query_string + ")?show=sku,name,regularPrice,salePrice&apiKey=xkuweuxjvtgpnpv2vs5usq35&format=json"
+
+		r = requests.get(api_string)
 		response = r.json()
 
 		for p in list(response['products']):
@@ -79,6 +82,5 @@ def user_request(request):
 
 	elif request.method == "POST":
 		data = JSONParser().parse(request)
-		print data
 		return JSONResponse(data, status=200)
 	
