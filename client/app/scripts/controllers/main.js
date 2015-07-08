@@ -21,7 +21,8 @@ angular.module('clientApp')
 
     $scope.accept = function(watcher) {
     	console.log("Adding Query: " + watcher.query);
-    	$http.post('http://localhost:8000/watchers/', {'query_string':watcher.query,'name':'test','target_price':watcher.target,'threshold':watcher.threshold, 'email':watcher.email}).
+        var sku = $scope.getSkuFromURL(watcher.query);
+    	$http.post('http://localhost:8000/watchers/', {'query_string':sku,'name':'test','target_price':watcher.target,'threshold':watcher.threshold,'email':watcher.email}).
     		success(function(data, status, headers, config){
     			$scope.updateWatchers();
     			$scope.watcher = $scope.empty;
@@ -38,5 +39,9 @@ angular.module('clientApp')
     	 });
     };
 
-    $interval( function(){$scope.updateWatchers();}, 2000)
+    $interval( function(){$scope.updateWatchers();}, 6000)
+
+    $scope.getSkuFromURL = function(url) {
+        return url.substring(url.indexOf("skuId=")+6, url.length);
+    };
   });

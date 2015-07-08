@@ -1,21 +1,28 @@
-<div class="jumbotron">
+<div class="container">
+    <p>
+      <label for="user-input">Your Info</label>
+      <br>
+      Product URL: <input id="url" type="text" ng-model="watcher.query">
+      <br>
+      Target price: <input type="text" ng-model="watcher.target">
+      <br>
+      Threshold: <input type="text" ng-model="watcher.threshold">
+      <br>
+      Email: <input id="email" type="text" ng-model="watcher.email">
+      <input type="button" ng-click="accept(watcher)" value="Go" />
+    </p>
 
-  <h2>Add Watcher</h2>
 
-  <form novalidate class="simple-form">
-    SKU: <input type="text" ng-model="watcher.query" /><br />
-    Target price: <input type="text" ng-model="watcher.target" /><br />
-    Threshold: <input type="text" ng-model="watcher.threshold" /><br />
-    e-mail: <input type="text" ng-model="watcher.email" /><br />
-    <input type="button" ng-click="accept(watcher)" value="Go" />
-  </form>
-
-</div>
-
-<div class="jumbotron">
+  <div class="jumbotron">
 
   <h2>Active Watchers</h2>
-  <p>{{watchers}} </P>
-  <input type="button" ng-click="updateWatchers()" value="Refresh" />
+    <p>{{watchers}} </P>
+    <input type="button" ng-click="updateWatchers()" value="Refresh" />
+
+  </div>
+
 
 </div>
+
+
+
