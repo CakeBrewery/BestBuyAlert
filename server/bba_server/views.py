@@ -25,15 +25,15 @@ class JSONResponse(HttpResponse):
 def sendmail(watcher_purchase):
 	email_list = set()
 	for watcher in watcher_purchase:
-		if (not watcher.email_sent):
+		if (watcher.send_email):
 			email_list.add(watcher.email)
 
 	for email in email_list:
 		product_alert = []
 		for watcher in watcher_purchase:
-			if (not watcher.email_sent):
+			if (watcher.send_email and watcher.email == email):
 				product_alert.append("[$" + str(watcher.lowest_price) + "] " + watcher.name)
-				watcher.email_sent = True
+				watcher.send_email = False
 				watcher.save()
 		send_mail('BBA - Purchase Alert', "\n".join(product_alert), 'no-reply@bba.com', [email], fail_silently=True)
 
