@@ -14,7 +14,7 @@ class Watcher(models.Model):
 	target_price = models.DecimalField(max_digits=8, decimal_places=2)
 	lowest_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0)
 	threshold = models.DecimalField(max_digits=4, decimal_places=2, default=0.1)
-	email = models.TextField() 
+	email = models.TextField(default='') 
 	send_email = models.BooleanField(default=False)
 
 	def update(self): 

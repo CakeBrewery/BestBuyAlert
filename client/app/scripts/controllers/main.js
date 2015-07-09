@@ -18,16 +18,19 @@ angular.module('clientApp')
     $scope.watchers = [];
     $scope.empty = {};
     $scope.length = $scope.watchers.length;
+    $scope.send_email = 'False'
     
     $scope.accept = function(watcher) {
-    	console.log("Adding Query: " + watcher.query);
         var sku = $scope.getSkuFromURL(watcher.query);
-    	$http.post('http://localhost:8000/watchers/', {'query_string':sku,'name':'test','target_price':watcher.target,'threshold':watcher.threshold,'email':watcher.email}).
+        var email = ''
+        if($scope.send_email == 'True'){
+            email = watcher.email;
+        }
+    	$http.post('http://localhost:8000/watchers/', {'query_string':sku,'name':'test','target_price':watcher.target,'threshold':watcher.threshold,'email':email, 'send_email':$scope.send_email}).
     		success(function(data, status, headers, config){
     			$scope.updateWatchers();
     			$scope.watcher = $scope.empty;
     		});
-
     };
 
     $scope.updateWatchers = function() {
@@ -37,7 +40,6 @@ angular.module('clientApp')
     	 	}).
     	 error(function(data, status, headers, config){
     	 });
-         console.log($scope.watchers.length);
          $scope.output = "";
          for(var i = 0; i < $scope.watchers.length; i++){
             //$scope.output += "<p>" + "The product's name is: " + $scope.watchers[i]['name'] + "</p>";

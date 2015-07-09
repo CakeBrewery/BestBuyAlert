@@ -74,7 +74,7 @@ def watcher_list(request):
 
 		name = response['products'][0]['name']
 
-		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email, send_email=send_email)
+		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email, send_email=(send_email=='True'))
 		current_watcher.save()
 
 		for p in list(response['products']):

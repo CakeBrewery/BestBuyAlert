@@ -8,7 +8,11 @@
       <br>
       Threshold: <input type="text" ng-model="watcher.threshold">
       <br>
-      Email: <input id="email" type="text" ng-model="watcher.email">
+      <input type="checkbox" ng-model="send_email" ng-true-value="'True'" ng-false-value="'False'"> Send Email Notification 
+      <br>
+      <div ng-hide="send_email=='False'">
+        Email: <input id="email" type="text" ng-model="watcher.email">
+      </div>
       <input type="button" ng-click="accept(watcher)" value="Go" />
     </p>
 
