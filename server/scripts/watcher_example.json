@@ -1,6 +1,7 @@
 {
-	"name":"iphone watcher",
-	"query_string":"iphone 6s", 
+	"name":"Samsung - 3.6 Cu. Ft. 9-Cycle High-Efficiency Front-Loading Washer with Steam - White",
+	"query_string":"6492139", 
 	"target_price":"700", 
-	"threshold":"0.10"
+	"threshold":"0.10",
+	"email":"not@me"
 }
