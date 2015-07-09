@@ -65,6 +65,7 @@ def watcher_list(request):
 		target_price = Decimal(data['target_price'])
 		threshold = Decimal(data['threshold'])
 		email = data['email']
+		send_email = data['send_email']
 
 		api_string = "http://api.remix.bestbuy.com/v1/products(sku=" + query_string + ")?show=sku,name,regularPrice,salePrice&apiKey=xkuweuxjvtgpnpv2vs5usq35&format=json"
 
@@ -73,7 +74,7 @@ def watcher_list(request):
 
 		name = response['products'][0]['name']
 
-		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email)
+		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email, send_email=send_email)
 		current_watcher.save()
 
 		for p in list(response['products']):
