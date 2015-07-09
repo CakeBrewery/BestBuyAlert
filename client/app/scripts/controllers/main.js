@@ -17,8 +17,8 @@ angular.module('clientApp')
 
     $scope.watchers = [];
     $scope.empty = {};
-
-
+    $scope.length = $scope.watchers.length;
+    
     $scope.accept = function(watcher) {
     	console.log("Adding Query: " + watcher.query);
         var sku = $scope.getSkuFromURL(watcher.query);
@@ -27,6 +27,7 @@ angular.module('clientApp')
     			$scope.updateWatchers();
     			$scope.watcher = $scope.empty;
     		});
+
     };
 
     $scope.updateWatchers = function() {
@@ -35,13 +36,29 @@ angular.module('clientApp')
     	 		$scope.watchers = data;
     	 	}).
     	 error(function(data, status, headers, config){
-
     	 });
+         console.log($scope.watchers.length);
+         $scope.output = "";
+         for(var i = 0; i < $scope.watchers.length; i++){
+            //$scope.output += "<p>" + "The product's name is: " + $scope.watchers[i]['name'] + "</p>";
+            $scope.output += "<ul> The product's name is:" + $scope.watchers[i]['name'] ;
+            $scope.output += "<li>Your Target Price: " + $scope.watchers[i]['target_price'] + "</li>";
+            $scope.output += "<li>The Lowest Price: " + $scope.watchers[i]['lowest_price'] + "</li>";
+            if($scope.watchers[i]['purchase']){
+                $scope.output += "<li> It's a good time to make a purchase" + "</li>";
+            }else{
+                $scope.output += "<li> It's not a good time to make a purchase" + "</li>";
+            }
+            $scope.output += "</ul>";
+         }
     };
 
+   
     $interval( function(){$scope.updateWatchers();}, 6000)
 
     $scope.getSkuFromURL = function(url) {
         return url.substring(url.indexOf("skuId=")+6, url.length);
     };
+
+
   });

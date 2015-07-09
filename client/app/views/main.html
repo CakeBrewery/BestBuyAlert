@@ -12,17 +12,18 @@
       <input type="button" ng-click="accept(watcher)" value="Go" />
     </p>
 
+  <script>
 
+  </script>
+  
   <div class="jumbotron">
 
   <h2>Active Watchers</h2>
-    <p>{{watchers}} </P>
+    <div ng-bind-html="output"></div>
     <input type="button" ng-click="updateWatchers()" value="Refresh" />
-
   </div>
 
 
 </div>
-
 
 
