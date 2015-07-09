@@ -5,6 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from bba_server.models import Product, Watcher
 from bba_server.serializers import ProductSerializer, WatcherSerializer
+from django.core.mail import send_mail
 
 import requests
 import json
@@ -21,6 +22,16 @@ class JSONResponse(HttpResponse):
 		kwargs['content_type'] = 'application/json'
 		super(JSONResponse, self).__init__(content, **kwargs)
 
+def sendmail(watcher_purchase):
+	email_list = set()
+	for watcher in watcher_purchase:
+		email_list.add(watcher.email)
+
+	for email in email_list:
+		product_alert = []
+		for watcher in watcher_purchase:
+			product_alert.append("[$" + str(watcher.lowest_price) + "] " + watcher.name)
+		send_mail('BBA - Purchase Alert', "\n".join(product_alert), 'no-reply@bba.com', [email], fail_silently=True)
 
 
 @csrf_exempt
@@ -34,6 +45,11 @@ def watcher_list(request):
 
 		watcher = Watcher.objects.all()
 		serializer = WatcherSerializer(watcher, many=True)
+
+		watcher_purchase = Watcher.objects.all().filter(purchase=True)
+		if (watcher_purchase):
+			sendmail(watcher_purchase)
+
 		return JSONResponse(serializer.data)
 
 	elif request.method == 'POST':
