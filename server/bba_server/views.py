@@ -27,13 +27,14 @@ def sendmail(watcher_purchase):
 	for watcher in watcher_purchase:
 		if (not watcher.email_sent):
 			email_list.add(watcher.email)
-			watcher.email_sent = True
-			watcher.save()
 
 	for email in email_list:
 		product_alert = []
 		for watcher in watcher_purchase:
-			product_alert.append("[$" + str(watcher.lowest_price) + "] " + watcher.name)
+			if (not watcher.email_sent):
+				product_alert.append("[$" + str(watcher.lowest_price) + "] " + watcher.name)
+				watcher.email_sent = True
+				watcher.save()
 		send_mail('BBA - Purchase Alert', "\n".join(product_alert), 'no-reply@bba.com', [email], fail_silently=True)
 
 
@@ -60,19 +61,20 @@ def watcher_list(request):
 
 		data = JSONParser().parse(request)
 
-		name = data['name']
 		query_string = data['query_string']
 		target_price = Decimal(data['target_price'])
 		threshold = Decimal(data['threshold'])
 		email = data['email']
 
-		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email)
-		current_watcher.save()
-
 		api_string = "http://api.remix.bestbuy.com/v1/products(sku=" + query_string + ")?show=sku,name,regularPrice,salePrice&apiKey=xkuweuxjvtgpnpv2vs5usq35&format=json"
 
 		r = requests.get(api_string)
 		response = r.json()
+
+		name = response['products'][0]['name']
+
+		current_watcher = Watcher(name = name, query_string=query_string, target_price=target_price, threshold=threshold, email=email)
+		current_watcher.save()
 
 		for p in list(response['products']):
 			product = Product(
