@@ -25,7 +25,10 @@ class JSONResponse(HttpResponse):
 def sendmail(watcher_purchase):
 	email_list = set()
 	for watcher in watcher_purchase:
-		email_list.add(watcher.email)
+		if (not watcher.email_sent):
+			email_list.add(watcher.email)
+			watcher.email_sent = True
+			watcher.save()
 
 	for email in email_list:
 		product_alert = []
