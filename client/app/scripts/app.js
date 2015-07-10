@@ -10,6 +10,7 @@
  */
 angular
   .module('clientApp', [
+    'chart.js',
     'ngAnimate',
     'ngCookies',
     'ngResource',

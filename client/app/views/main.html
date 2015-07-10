@@ -23,6 +23,16 @@
   <div class="jumbotron">
 
   <h2>Active Watchers</h2>
+      <div class="row" ng-controller="MainCtrl">
+        
+          <div class="panel panel-default">
+            <div class="panel-heading">Price Info</div>
+              <div class="panel-body">
+                <canvas class="chart chart-bar" chart-type="type" data="data" labels="labels" series="series"></canvas>
+              </div>
+          </div>
+     
+      </div>
     <div ng-bind-html="output"></div>
     <input type="button" ng-click="updateWatchers()" value="Refresh" />
   </div>

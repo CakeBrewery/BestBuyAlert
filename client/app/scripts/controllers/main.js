@@ -15,6 +15,8 @@ angular.module('clientApp')
       'Karma',
     ];
 
+  
+
     $scope.watchers = [];
     $scope.empty = {};
     $scope.length = $scope.watchers.length;
@@ -40,16 +42,36 @@ angular.module('clientApp')
     	 	}).
     	 error(function(data, status, headers, config){
     	 });
+         $scope.labels = [];
+         $scope.series = ['Target Price', 'Lowest Price'];
+         
+         $scope.data = [
+         
+         ];
          $scope.output = "";
+
          for(var i = 0; i < $scope.watchers.length; i++){
             //$scope.output += "<p>" + "The product's name is: " + $scope.watchers[i]['name'] + "</p>";
-            $scope.output += "<ul> The product's name is:" + $scope.watchers[i]['name'] ;
-            $scope.output += "<li>Your Target Price: " + $scope.watchers[i]['target_price'] + "</li>";
-            $scope.output += "<li>The Lowest Price: " + $scope.watchers[i]['lowest_price'] + "</li>";
-            if($scope.watchers[i]['purchase']){
-                $scope.output += "<li> It's a good time to make a purchase" + "</li>";
+            if(i == 0){
+                $scope.data = [
+                     [$scope.watchers[i]['target_price']],
+                     [$scope.watchers[i]['lowest_price']]
+                ];
+                $scope.labels = ["SKU: " + $scope.watchers[i]['query_string']];
             }else{
-                $scope.output += "<li> It's not a good time to make a purchase" + "</li>";
+                //$scope.data.push([$scope.watchers[i]['target_price']],$scope.watchers[i]['lowest_price']);
+                $scope.labels.push("SKU: " + $scope.watchers[i]['query_string']);
+                $scope.data[0].push($scope.watchers[i]['target_price']);
+                $scope.data[1].push($scope.watchers[i]['lowest_price']);
+            }   
+         }
+         $scope.output += "<h2> Our Advice </h2>";
+         for(var i = 0; i < $scope.watchers.length; i++){
+            $scope.output += "<ul> SKU: " + $scope.watchers[i]['query_string'] + "\nProduct's Name: " + $scope.watchers[i]['name'];
+            if($scope.watchers[i]['purchase']){
+                $scope.output += "<li> It's a good time to make a purchase </li>";
+            }else{
+                $scope.output += "<li> It's not a good time to make a purchase </li>";
             }
             $scope.output += "</ul>";
          }
