@@ -31,6 +31,9 @@ class Watcher(models.Model):
 			if self.lowest_price <= self.target_price:
 				self.status = 'BUY'
 				self.purchase = True
+		else:
+			self.status = 'EXPENSIVE'
+			self.purchase = False
 
 		self.save()
 
@@ -38,5 +41,6 @@ class Watcher(models.Model):
 #A product is one of possibly many products in the product pool of a watcher
 class Product(models.Model):
 	name = models.TextField()
+	sku = models.TextField()
 	lowest_price = models.DecimalField(max_digits=8, decimal_places=2)
 	watcher = models.ForeignKey(Watcher, related_name='products')

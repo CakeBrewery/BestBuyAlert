@@ -3,5 +3,6 @@
 	"query_string":"6492139", 
 	"target_price":"700", 
 	"threshold":"0.10",
-	"email":"not@me"
+	"email":"not@me",
+	"send_email":"False"
 }
