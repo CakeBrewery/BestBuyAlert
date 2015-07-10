@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'bba_server',
     'corsheaders',
+    'django_crontab'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +54,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+CRONJOBS = [
+    ('*/1 * * * *', 'bba_server.cron.update_prices')
+]
 
 ROOT_URLCONF = 'server.urls'
 

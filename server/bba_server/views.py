@@ -81,6 +81,7 @@ def watcher_list(request):
 			product = Product(
 				name=p['name'], 
 				lowest_price=min(p['regularPrice'],p['salePrice']), 
+				sku=p['sku'],
 				watcher=current_watcher)
 			product.save()
 
