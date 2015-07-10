@@ -1,7 +1,6 @@
 <div class="container">
-    <p>
+    
       <label for="user-input">Your Info</label>
-      <br>
       Product URL: <input id="url" type="text" ng-model="watcher.query">
       <br>
       Target price: <input type="text" ng-model="watcher.target">
@@ -13,18 +12,11 @@
       <div ng-hide="send_email=='False'">
         Email: <input id="email" type="text" ng-model="watcher.email">
       </div>
-      <input type="button" ng-click="accept(watcher)" value="Go" />
-    </p>
-
-  <script>
-
-  </script>
+      <button ng-click="accept(watcher)" >Submit</button>
   
-  <div class="jumbotron">
 
-  <h2>Active Watchers</h2>
-      <div class="row" ng-controller="MainCtrl">
-        
+  <label for="watchers">Active Watchers</label>
+      <div class="row" ng-controller="MainCtrl"> 
           <div class="panel panel-default">
             <div class="panel-heading">Price Info</div>
               <div class="panel-body">
@@ -33,9 +25,10 @@
           </div>
      
       </div>
+  <label for="watchers">Our Advice</label>
     <div ng-bind-html="output"></div>
-    <input type="button" ng-click="updateWatchers()" value="Refresh" />
-  </div>
+    <button ng-click="updateWatchers()">Refresh</button>
+ 
 
 
 </div>

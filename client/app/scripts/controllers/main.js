@@ -65,13 +65,14 @@ angular.module('clientApp')
                 $scope.data[1].push($scope.watchers[i]['lowest_price']);
             }   
          }
-         $scope.output += "<h2> Our Advice </h2>";
+
+         
          for(var i = 0; i < $scope.watchers.length; i++){
-            $scope.output += "<ul> SKU: " + $scope.watchers[i]['query_string'] + "\nProduct's Name: " + $scope.watchers[i]['name'];
+            $scope.output += "<ul> <li>SKU: " + $scope.watchers[i]['query_string'] + "</li><li>Product's Name: " + $scope.watchers[i]['name'];
             if($scope.watchers[i]['purchase']){
-                $scope.output += "<li> It's a good time to make a purchase </li>";
+                $scope.output += "</li><li> It's a <strong>good time</strong> to make a purchase </li>";
             }else{
-                $scope.output += "<li> It's not a good time to make a purchase </li>";
+                $scope.output += "</li><li> It's <strong>not a good time</strong> to make a purchase </li>";
             }
             $scope.output += "</ul>";
          }
