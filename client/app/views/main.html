@@ -1,11 +1,15 @@
-<div class="container">
+<div class="container jumbotron">
+
+      <p>Get started by creating your price watcher. Just submit a link of your 
+        desired Best Buy product's link, your target price, and a threshold.
+      </p>
     
-      <label for="user-input">Your Info</label>
+      <label for="user-input">Add Price Watcher</label>
       Product URL: <input id="url" type="text" ng-model="watcher.query">
       <br>
-      Target price: <input type="text" ng-model="watcher.target">
+      Target price: <input type="text" size="5" ng-model="watcher.target"> $
       <br>
-      Threshold: <input type="text" ng-model="watcher.threshold">
+      Threshold: <input type="text" size="5"ng-model="watcher.threshold">
       <br>
       <input type="checkbox" ng-model="send_email" ng-true-value="'True'" ng-false-value="'False'"> Send Email Notification 
       <br>

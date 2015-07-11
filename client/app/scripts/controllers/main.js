@@ -68,7 +68,7 @@ angular.module('clientApp')
 
          
          for(var i = 0; i < $scope.watchers.length; i++){
-            $scope.output += "<ul> <li>SKU: " + $scope.watchers[i]['query_string'] + "</li><li>Product's Name: " + $scope.watchers[i]['name'];
+            $scope.output += "<ul> <li>SKU: " + $scope.watchers[i]['query_string'] + " [" + $scope.watchers[i]['status'] + "] " + "</li><li>Product's Name: " + $scope.watchers[i]['name'];
             if($scope.watchers[i]['purchase']){
                 $scope.output += "</li><li> It's a <strong>good time</strong> to make a purchase </li>";
             }else{
@@ -79,7 +79,7 @@ angular.module('clientApp')
     };
 
    
-    $interval( function(){$scope.updateWatchers();}, 6000)
+    $interval( function(){$scope.updateWatchers();}, 3000)
 
     $scope.getSkuFromURL = function(url) {
         return url.substring(url.indexOf("skuId=")+6, url.length);
